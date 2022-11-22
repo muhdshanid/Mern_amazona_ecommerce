@@ -14,6 +14,9 @@ import SignupScreen from './screens/SignupScreen';
 import SigninScreeen from './screens/SigninScreeen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen'
+import ProfileScreen from './screens/ProfileScreen';
 function App() {
   const {state,dispatch:ctxDispatch} = useContext(Store) 
   const {cart,userInfo} = state
@@ -23,18 +26,21 @@ function App() {
     localStorage.removeItem("shippingAddress")
     localStorage.removeItem("cartItems")
     localStorage.removeItem("paymentMethod")
+    window.location.href = '/signin'
   }
   return (
     <BrowserRouter>
     <div className='d-flex flex-column site-container'>
       <ToastContainer position='bottom-center' limit={1}/>
       <header className='header-part'>
-        <Navbar bg='dark' variant='dark'>
+        <Navbar bg='dark' variant='dark' expand='lg'>
           <Container>
             <LinkContainer to="/">
             <Navbar.Brand>amazona</Navbar.Brand>
             </LinkContainer>
-            <Nav className='me-auto'>
+            <Navbar.Toggle aria-controls='basic-navbar-nav' />
+            <Navbar.Collapse id='basic-navbar-nav' >
+            <Nav className='me-auto w-100 justify-content-end'>
               <Link style={{color:"white",marginTop:"2px"}} to={"/cart"} className='nav-link'>
                 Cart 
                 {cart.cartItems.length > 0 && (
@@ -59,6 +65,7 @@ function App() {
                 <Link className="nav-link" to={"/signin"}> Sign In </Link>
               }
             </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </header>
@@ -73,7 +80,10 @@ function App() {
           <Route path='/shipping' element={<ShippingScreen/>} />
           <Route path='/payment' element={<PaymentMethodScreen/>} />
           <Route path='/placeorder' element={<PlaceOrderScreen/>} />
-        </Routes>
+          <Route path='/order/:id' element={<OrderScreen/>} />
+          <Route path='/orderhistory' element={<OrderHistoryScreen/>} />
+          <Route path='/profile' element={<ProfileScreen/>} />
+        </Routes> 
         </Container>
       </main>
       <footer>
