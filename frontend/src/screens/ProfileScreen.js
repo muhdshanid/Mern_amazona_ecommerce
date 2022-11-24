@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Store } from "../Store";
 import { Helmet } from "react-helmet-async";
 import { Button, Form } from "react-bootstrap";
-import { stripBasename } from "@remix-run/router";
 import { useState } from "react";
 import { useReducer } from "react";
 import { getError } from "../util";
